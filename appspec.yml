@@ -1,18 +1,17 @@
 version: 0.0
 os: linux
 files:
-  - source: /index.html
-    destination: /var/www/html/
-hooks:
+  - source: /index.html # 自動デプロイの対象ファイルorディレクトリ
+    destination: /var/www/html/ # デプロイ先の配置場所
+hooks: # 自動デプロイ中に任意のシェルを実行設定できる.vueでいうライフサイクルイベントみたいなモノ
   BeforeInstall:
     - location: scripts/install_dependencies
       timeout: 300
       runas: root
     - location: scripts/start_server
       timeout: 300
-      runas: root
+      runas: rootd
   ApplicationStop:
     - location: scripts/stop_server
       timeout: 300
       runas: root
-
